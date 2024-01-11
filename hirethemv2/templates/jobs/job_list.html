@@ -18,7 +18,7 @@
         <div class="row m-5 p-1">
         {% for job in jobs %}
         <div class="card m-3" style="width: 18rem;">
-            {% if job.company.url %}
+            {% if job.company.logo %}
             <img src="{{job.company.logo.url}}" class="card-img-top" alt="...">
             {% else %}
             <img src="/hirethemv2/hirethemv2/static/images/defaults/jobs/default.png" class="card-img-top" alt="...">
