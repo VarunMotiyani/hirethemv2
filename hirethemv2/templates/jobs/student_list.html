@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Career Connect: Student List{% endblock title %}
+
+{% block content %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg mt-5">
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="display-5 fw-bold text-uppercase"><i class="fa-solid fa-file-pen"></i> {{ job.company.name }} Student List</p>
+                    <div class="mt-2">
+                        
+                        <a class="btn btn-primary text-uppercase" href="{% url 'download_student_list_csv' job.id %}" title="Student List">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+
+                        <a class="btn btn-primary text-uppercase" href="{% url 'download_resumes' job.id %}" title="Download Resumes">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </a>
+
+                        <a class="btn btn-primary text-uppercase" href="http://127.0.0.1:5000/" target="_blank" title="Rank Resumes">
+                            Rank Resumes
+                        </a>
+
+                    </div>
+                </div>
+                <hr class="border border-dark border-2 opacity-75">
+
+                {% if applications %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>URN Number</th>
+                                <th>Department</th>
+                                <th>Address</th>
+                                <th>Tenth Percentage</th>
+                                <th>Tenth School</th>
+                                <th>Twelth Percentage</th>
+                                <th>Twelth School</th>
+                                <th> Current CGPA</th>
+                                <th>Active Backlogs</th>
+                                <!-- Add more headers for other fields -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for application in applications %}
+                                <tr>
+                                    <td>{{ application.user.name }}</td>
+                                    <td>{{ application.user.urn_number }}</td>
+                                    <td>{{ application.user.department }}</td>
+                                    <td>{{ application.user.address }}</td>
+                                    <td>{{ application.user.tenth_percentage }}</td>
+                                    <td>{{ application.user.tenth_school_name }}</td>
+                                    <td>{{ application.user.twelth_percentage }}</td>
+                                    <td>{{ application.user.twelth_school_name }}</td>
+                                    <td>{{ application.user.current_cgpa }}</td>
+                                    <td>{{ application.user.active_backlogs }}</td>
+                                    <!-- Add more columns for other fields -->
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No students have applied for this job.</p>
+                {% endif %}
+
+                <div class="mt-4">
+                    <a class="btn btn-secondary text-uppercase" href="{% url 'jobs-detail' pk=job.id %}"><i class="fa-solid fa-arrow-left"></i> Back to Job</a>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- container -->
+</div>
+</div>
+{% include "widgets/base_footer.html" %}
+{% endblock %}
